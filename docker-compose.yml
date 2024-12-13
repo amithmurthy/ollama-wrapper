@@ -1,0 +1,27 @@
+services:
+  frontend:
+    build: 
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    image: clear-match-client:1
+    restart: always
+    ports: 
+      - 3000:3000
+    volumes:
+      - ./frontend:/app
+    
+  
+  backend:
+    build: 
+      context: .
+      dockerfile: ./backend/Dockerfile
+    image: clear-match-api:1
+    restart: always
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend:/api/
+    depends_on:
+      - frontend
+      
+  
